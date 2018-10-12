@@ -87,14 +87,14 @@ DATABASES = {
     },
 
 
-#    'rds_infinitus': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': environ['rds_infinitus_db'],
-#        'USER': environ['rds_infinitus_user'],
-#        'PASSWORD': environ['rds_infinitus_pw'],
-#        'HOST': environ['rds_infinitus_host'],
-#        'PORT': '5432' 
- #   }
+    'rds_infinitus': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': environ['RDS_DB_NAME'],
+        'USER': environ['RDS_USERNAME'],
+        'PASSWORD': environ['RDS_PASSWORD'],
+        'HOST': environ['RDS_HOSTNAME'],
+        'PORT': environ['RDS_PORT']
+   }
 }
 
 default_database = environ.get('DJANGO_DATABASE', 'local')

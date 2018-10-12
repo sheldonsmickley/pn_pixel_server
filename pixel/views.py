@@ -19,7 +19,7 @@ def pixel(request):
         "pn_cookie_id": pn_cookie_id,
         "ip_address": request.META['REMOTE_ADDR'],
         "url": request.META['HTTP_HOST'],
-        "referring_url": request.META.get('HTTP_REFERER'),
+        "referring_url": request.META.get('HTTP_REFERER') if request.META.get('HTTP_REFERER') else 'None',
         "user_agent": request.META['HTTP_USER_AGENT'], 
     }
 

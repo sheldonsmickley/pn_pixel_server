@@ -1,7 +1,5 @@
 from django.db import models
-from mongoengine import Document, fields
 from django_unixdatetimefield import UnixDateTimeField
-from djongo import models
 
 PIXEL_ACTIONS = (
     ('v','VIEW'),
@@ -15,5 +13,5 @@ class PixelEvent(models.Model):
     pn_cookie_id = models.CharField(max_length=200)
     ip_address = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
-    referring_url = models.CharField(max_length=200)
+    referring_url = models.CharField(max_length=200, null=True, blank=True, default="None")
     user_agent = models.CharField(max_length=200)

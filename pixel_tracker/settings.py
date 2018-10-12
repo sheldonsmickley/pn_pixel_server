@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from os import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -76,12 +77,28 @@ WSGI_APPLICATION = 'pixel_tracker.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME':  '1mt_events',
-    }
+    'local': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'infinitus',
+        'USER': 'sheldon_infinitus',
+        'PASSWORD': 'infinitus_pw',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    },
+
+
+#    'rds_infinitus': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': environ['rds_infinitus_db'],
+#        'USER': environ['rds_infinitus_user'],
+#        'PASSWORD': environ['rds_infinitus_pw'],
+#        'HOST': environ['rds_infinitus_host'],
+#        'PORT': '5432' 
+ #   }
 }
 
+default_database = environ.get('DJANGO_DATABASE', 'local')
+DATABASES['default'] = DATABASES[default_database]
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

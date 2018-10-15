@@ -24,7 +24,6 @@ def pixel(request):
     }
 
     try:
-        import pdb; pdb.set_trace();
         pixel_event = PixelEvent(**pixel_event_fields)
         pixel_event.save()
     except:

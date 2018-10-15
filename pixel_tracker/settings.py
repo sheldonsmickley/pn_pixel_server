@@ -26,7 +26,7 @@ SECRET_KEY = 'mb7(tf&kq=*@=lg(u_*ayfra^0ow&k)r#qy%jfm7j&vp##e1ky'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["5znzs9lnc3.execute-api.us-east-1.amazonaws.com"]
 
 
 # Application definition
@@ -78,28 +78,29 @@ WSGI_APPLICATION = 'pixel_tracker.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 
-if 'RDS_DB_NAME' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
+#if 'RDS_DB_NAME' in os.environ:
+DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'infinitus',
-        'USER': 'sheldon_infinitus',
+        'NAME': 'infinitus-db',
+        'USER': 'sheldon',
         'PASSWORD': 'infinitus_pw',
-        'HOST': 'localhost',
-        'PORT': '5432'
-        }
+        'HOST': 'infinitus-db.cthcxycsecqi.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
+}
+
+#else:
+#    DATABASES = {
+#        'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'infinitus',
+#        'USER': 'sheldon_infinitus',
+#        'PASSWORD': 'infinitus_pw',
+#        'HOST': 'localhost',
+#        'PORT': '5432'
+#        }
+#    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

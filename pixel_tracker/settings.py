@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'pixel',
+    'pixel_tracker',
 ]
 
 MIDDLEWARE = [
@@ -76,29 +77,29 @@ WSGI_APPLICATION = 'pixel_tracker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'local': {
+
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'infinitus',
         'USER': 'sheldon_infinitus',
         'PASSWORD': 'infinitus_pw',
         'HOST': 'localhost',
         'PORT': '5432'
-    },
-
-
-    'rds_infinitus': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': environ['RDS_DB_NAME'],
-        'USER': environ['RDS_USERNAME'],
-        'PASSWORD': environ['RDS_PASSWORD'],
-        'HOST': environ['RDS_HOSTNAME'],
-        'PORT': environ['RDS_PORT']
-   }
-}
-
-default_database = environ.get('DJANGO_DATABASE', 'local')
-DATABASES['default'] = DATABASES[default_database]
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -136,4 +137,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, "www", "static")
 STATIC_URL = '/static/'
+

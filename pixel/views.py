@@ -12,11 +12,11 @@ import sys
 def pixel(request):
     pn_cookie_key = "pn"
     pn_cookie_id = request.COOKIES.get(pn_cookie_key) or get_random_string(length=32)
-
     pixel_event_fields = {
         "member_id": request.query_params.get('member_id'),
         "action": request.query_params.get('action'),
         "pn_cookie_id": pn_cookie_id,
+        "ga_cookie_id": request.query_params.get('ga_cookie') if request.query_params.get('ga_cookie') else 'None',
         "ip_address": request.META['REMOTE_ADDR'],
         "url": request.META['HTTP_HOST'],
         "referring_url": request.META.get('HTTP_REFERER') if request.META.get('HTTP_REFERER') else 'None',

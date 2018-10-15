@@ -26,7 +26,7 @@ SECRET_KEY = 'mb7(tf&kq=*@=lg(u_*ayfra^0ow&k)r#qy%jfm7j&vp##e1ky'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["5znzs9lnc3.execute-api.us-east-1.amazonaws.com"]
+ALLOWED_HOSTS = ["5znzs9lnc3.execute-api.us-east-1.amazonaws.com", "127.0.0.1"]
 
 
 # Application definition

@@ -11,6 +11,7 @@ class PixelEvent(models.Model):
     member_id = models.IntegerField()
     action = models.CharField(choices=PIXEL_ACTIONS, max_length=200)
     pn_cookie_id = models.CharField(max_length=200)
+    ga_cookie_id = models.CharField(max_length=200, default="None")
     ip_address = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
     referring_url = models.CharField(max_length=200, null=True, blank=True, default="None")

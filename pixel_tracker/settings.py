@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'pixel',
     'pixel_tracker',
+    'zappa_django_utils',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,7 @@ WSGI_APPLICATION = 'pixel_tracker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'infinitus-db',
+        'NAME': 'postgres',
         'USER': 'sheldon',
         'PASSWORD': 'infinitus_pw',
         'HOST': 'infinitus-db.cthcxycsecqi.us-east-1.rds.amazonaws.com',

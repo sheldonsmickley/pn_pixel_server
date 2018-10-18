@@ -79,40 +79,28 @@ WSGI_APPLICATION = 'pixel_tracker.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 
-#if environ['mt_DB'] != 'dev':
-#    DATABASES = {
-#        'default': {
-#            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#            'NAME': environ.get("prd_name"),
-#            'USER': environ.get("prd_user"),
-#            'PASSWORD': environ.get("prd_pw"),
-#            'HOST': environ.get("prd_host"),
-#            'PORT': environ.get("prd_port"),
-#        }
-#    }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'sheldon',
-        'PASSWORD': 'infinitus_pw',
-        'HOST': 'infinitus-db.cthcxycsecqi.us-east-1.rds.amazonaws.com',
-        'PORT': '5432'
+if environ['mt_DB'] == 'prd':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': environ["prd_name"],
+            'USER': environ["prd_user"],
+            'PASSWORD': environ["prd_pw"],
+            'HOST': environ["prd_host"],
+            'PORT': environ["prd_port"],
+        }
     }
-}
-
-#else:
-#    DATABASES = {
-#        'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'infinitus',
-#        'USER': 'sheldon_infinitus',
-#        'PASSWORD': 'infinitus_pw',
-#        'HOST': 'localhost',
-#        'PORT': '5432',
-#        }
-#    }
+else:
+    DATABASES = {
+        'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'infinitus',
+        'USER': 'sheldon_infinitus',
+        'PASSWORD': 'infinitus_pw',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

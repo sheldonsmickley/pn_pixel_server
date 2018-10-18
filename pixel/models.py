@@ -17,3 +17,4 @@ class PixelEvent(models.Model):
     ip_address = models.CharField(max_length=200)
     referring_url = models.CharField(max_length=200, null=True, blank=True, default="None")
     user_agent = models.CharField(max_length=200)
+    params = JSONField(default=dict)

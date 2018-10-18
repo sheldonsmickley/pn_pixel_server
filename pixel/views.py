@@ -21,18 +21,10 @@ def pixel(request):
         "session_id": request.query_params.get('sess') if request.query_params.get('sess') else 'None',
         "ga_cookie_id": request.query_params.get('ga_cookie') if request.query_params.get('ga_cookie') else 'None',
         "ip_address": request.META['REMOTE_ADDR'],
-        "url": request.META['HTTP_HOST'],
         "referring_url": request.META.get('HTTP_REFERER') if request.META.get('HTTP_REFERER') else 'None',
         "user_agent": request.META['HTTP_USER_AGENT']
         }
 
-    if request.META.get('HTTP_REFERER') is not None:
-        try:
-            queryParamsHash = {item.split("=")[0]:item.split("=")[1] for item in request.META['HTTP_REFERER'].split("?")[1].split("&")} 
-            pixel_event_fields['params'] = queryParamsHash
-        except:
-            e = sys.exc_info()
-            client.captureException()
     try:
         pixel_event = PixelEvent(**pixel_event_fields)
         pixel_event.save()

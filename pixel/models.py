@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 from django_unixdatetimefield import UnixDateTimeField
 
 PIXEL_ACTIONS = (
@@ -17,8 +18,4 @@ class PixelEvent(models.Model):
     url = models.CharField(max_length=200)
     referring_url = models.CharField(max_length=200, null=True, blank=True, default="None")
     user_agent = models.CharField(max_length=200)
-    utm_medium = models.CharField(max_length=200, default="None", null=True)
-    utm_source = models.CharField(max_length=200, default="None", null=True)
-    utm_campaign = models.CharField(max_length=200, default="None", null=True)
-    utm_content = models.CharField(max_length=200, default="None", null=True)
-    utm_term = models.CharField(max_length=200, default="None", null=True)
+    params = JSONField(default=dict)

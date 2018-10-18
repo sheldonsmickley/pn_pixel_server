@@ -14,7 +14,6 @@ def pixel(request):
     pn_cookie_id = request.COOKIES.get(pn_cookie_key) or get_random_string(length=32)
     ps_cookie_id = get_random_string(length=32)
     
-    import pdb; pdb.set_trace();
     pixel_event_fields = {
         "member_id": request.query_params.get('member_id'),
         "action": request.query_params.get('action'),
@@ -41,7 +40,6 @@ def pixel(request):
         e = sys.exc_info()
         client.captureException()
 
-    import pdb; pdb.set_trace();
     PIXEL_PNG_DATA = base64.b64decode(
         b"R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7")
     response = HttpResponse(PIXEL_PNG_DATA, content_type='image/png')

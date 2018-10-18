@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mb7(tf&kq=*@=lg(u_*ayfra^0ow&k)r#qy%jfm7j&vp##e1ky'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["5znzs9lnc3.execute-api.us-east-1.amazonaws.com", "127.0.0.1"]
 
@@ -83,11 +83,11 @@ if environ['mt_DB'] != 'dev':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'postgres',
-            'USER': 'sheldon',
-            'PASSWORD': 'infinitus_pw',
-            'HOST': 'infinitus-db.cthcxycsecqi.us-east-1.rds.amazonaws.com',
-            'PORT': '5432',
+            'NAME': environ.get("prd_name"),
+            'USER': environ.get("prd_user"),
+            'PASSWORD': environ.get("prd_pw"),
+            'HOST': environ.get("prd_host"),
+            'PORT': environ.get("prd_port"),
         }
     }
 
@@ -99,7 +99,7 @@ else:
         'USER': 'sheldon_infinitus',
         'PASSWORD': 'infinitus_pw',
         'HOST': 'localhost',
-        'PORT': '5432'
+        'PORT': '5432',
         }
     }
 

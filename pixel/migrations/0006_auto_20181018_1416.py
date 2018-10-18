@@ -34,6 +34,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pixelevent',
             name='params',
-            field=django.contrib.postgres.fields.jsonb.JSONField(default=None),
+            field=django.contrib.postgres.fields.jsonb.JSONField(default=dict),
         ),
     ]

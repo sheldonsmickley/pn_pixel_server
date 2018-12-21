@@ -25,14 +25,16 @@ def pixel(request):
         "user_agent": request.META['HTTP_USER_AGENT']
         }
 
-    if request.META.get('HTTP_REFERER') is not None:
+
+    if request.build_absolute_uri() is not None:
         try:
             queryParamsHash_ref = {}
             queryParamsHash_uri = {}
-            if "?" in request.META.get('HTTP_REFERER'):
+
+            if "?" in pixel_event_fields['referring_url']:
                 queryParamsHash_ref = {item.split("=")[0]:item.split("=")[1] for item in request.META['HTTP_REFERER'].split("?")[1].split("&")}
 
-            elif "?" in request.build_absolute_uri():
+            if "?" in request.build_absolute_uri():
                 queryParamsHash_uri = {item.split("=")[0]:item.split("=")[1] for item in request.build_absolute_uri().split("?")[1].split("&")}
 
             pixel_event_fields['params'] = {**queryParamsHash_ref, **queryParamsHash_uri}

@@ -7,12 +7,16 @@ from pixel.models import PixelEvent
 
 import base64
 import sys
+import hashlib
 
 @api_view(['GET'])
 def pixel(request):
     pn_cookie_key = "pn"
     pn_cookie_id = request.COOKIES.get(pn_cookie_key) or get_random_string(length=32)
     ps_cookie_id = get_random_string(length=32)
+    salted_ip = request.META['REMOTE_ADDR']+'1mt'
+
+    hashed_ip = hashlib.md5(salted_ip.encode('utf-8')).hexdigest()
 
     pixel_event_fields = {
         "member_id": request.query_params.get('member_id'),
@@ -20,7 +24,7 @@ def pixel(request):
         "pn_cookie_id": pn_cookie_id,
         "session_id": request.query_params.get('sess') if request.query_params.get('sess') else 'None',
         "ga_cookie_id": request.query_params.get('ga_cookie') if request.query_params.get('ga_cookie') else 'None',
-        "ip_address": request.META['REMOTE_ADDR'],
+        "ip_address": hashed_ip,
         "referring_url": request.META.get('HTTP_REFERER') if request.META.get('HTTP_REFERER') else 'None',
         "user_agent": request.META['HTTP_USER_AGENT']
         }
@@ -53,6 +57,7 @@ def pixel(request):
     PIXEL_PNG_DATA = base64.b64decode(
         b"R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7")
     response = HttpResponse(PIXEL_PNG_DATA, content_type='image/png')
+    
     response.set_cookie(pn_cookie_key, pn_cookie_id)
 
     return response
